@@ -1,8 +1,10 @@
+import Layout from "@/components/layout";
 import type { NextPage } from "next";
 
 const CommunityPostDetail: NextPage = () => {
   return (
-    <div>
+   <Layout canGoBack>
+     <div>
       <span className="my-3 ml-4 inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
         동네질문
       </span>
@@ -82,6 +84,7 @@ const CommunityPostDetail: NextPage = () => {
         </button>
       </div>
     </div>
+   </Layout>
   );
 };
 

@@ -1,9 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
+import Layout from "@/components/layout";
 import type { NextPage } from "next";
 
 const Live: NextPage = () => {
   return (
-    <div className="space-y-4 divide-y-2 py-10">
+    <Layout title="라이브" hasTabBar>
+      <div className="space-y-4 divide-y-2 py-10">
       {[1, 2, 3, 4, 5].map((_, i) => (
         <div key={i} className="px-4 pt-4">
           <div className="aspect-video w-full rounded-md bg-slate-300 shadow-sm" />
@@ -27,6 +29,7 @@ const Live: NextPage = () => {
         </svg>
       </button>
     </div>
+    </Layout>
   );
 };
 
