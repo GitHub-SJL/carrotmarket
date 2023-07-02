@@ -1,16 +1,17 @@
-import Layout from "@/components/layout";
 import type { NextPage } from "next";
+import Button from "../../components/button";
+import Layout from "../../components/layout";
 
 const ItemDetail: NextPage = () => {
   return (
     <Layout canGoBack>
-      <div className="px-4 py-10">
+      <div className="px-4  py-4">
         <div className="mb-8">
-          <div className="h-96 bg-slate-200" />
-          <div className="flex cursor-pointer items-center space-x-3 border-b  border-t py-3">
-            <div className="h-12 w-12 rounded-full bg-slate-300" />
+          <div className="h-96 bg-slate-300" />
+          <div className="flex cursor-pointer py-3 border-t border-b items-center space-x-3">
+            <div className="w-12 h-12 rounded-full bg-slate-300" />
             <div>
-              <p className="text-sm font-medium text-gray-700 ">Steve Jebs</p>
+              <p className="text-sm font-medium text-gray-700">Steve Jebs</p>
               <p className="text-xs font-medium text-gray-500">
                 View profile &rarr;
               </p>
@@ -18,8 +19,8 @@ const ItemDetail: NextPage = () => {
           </div>
           <div className="mt-5">
             <h1 className="text-3xl font-bold text-gray-900">Galaxy S50</h1>
-            <span className="mt-3 block text-3xl text-gray-900">$140</span>
-            <p className="my-3 text-base text-gray-700">
+            <span className="text-2xl block mt-3 text-gray-900">$140</span>
+            <p className=" my-6 text-gray-700">
               My money&apos;s in that office, right? If she start giving me some
               bullshit about it ain&apos;t there, and we got to go someplace
               else and get it, I&apos;m gonna shoot you in the head then and
@@ -29,11 +30,9 @@ const ItemDetail: NextPage = () => {
               in there, and that ni**a Winston or anybody else is in there, you
               the first motherfucker to get shot. You understand?
             </p>
-            <div className="itmes-center flex justify-between space-x-2">
-              <button className="focus: flex-1 rounded-md bg-orange-500 py-3 font-medium text-white ring-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2">
-                Talk to seller
-              </button>
-              <button className="first-letter: flex items-center justify-center rounded-md p-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500">
+            <div className="flex items-center justify-between space-x-2">
+              <Button large text="Talk to seller" />
+              <button className="p-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500">
                 <svg
                   className="h-6 w-6 "
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,11 +54,11 @@ const ItemDetail: NextPage = () => {
         </div>
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Similar items</h2>
-          <div className="mt-6 grid grid-cols-2 gap-4">
+          <div className=" mt-6 grid grid-cols-2 gap-4">
             {[1, 2, 3, 4, 5, 6].map((_, i) => (
               <div key={i}>
-                <div className="mb-4 h-56 w-full bg-slate-200" />
-                <h3 className="-mb-1 text-gray-700">Galaxy S60</h3>
+                <div className="h-56 w-full mb-4 bg-slate-300" />
+                <h3 className="text-gray-700 -mb-1">Galaxy S60</h3>
                 <span className="text-sm font-medium text-gray-900">$6</span>
               </div>
             ))}

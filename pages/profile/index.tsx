@@ -3,13 +3,13 @@ import type { NextPage } from "next";
 import Link from "next/link";
 const Profile: NextPage = () => {
   return (
-    <Layout title="나의 캐럿" hasTabBar>
+    <Layout title="나의 캐럿" hasTabBar >
       <div className="px-4 py-10">
         <div className="flex items-center space-x-3">
           <div className="h-16 w-16 rounded-full bg-slate-500" />
           <div className="flex flex-col">
             <span className="font-medium text-gray-900">Steve Jebs</span>
-            <span className="text-sm text-gray-700">Edit profile &rarr;</span>
+            <Link href='/profile/edit' className="text-sm text-gray-700">Edit profile &rarr;</Link>
           </div>
         </div>
         <div className="mt-10 flex justify-around">

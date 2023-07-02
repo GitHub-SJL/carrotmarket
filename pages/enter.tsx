@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 import { cls } from "../libs/utils";
-
+import Button from "@/components/button";
+import Input from "@/components/input";
 export default function Enter() {
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => setMethod("email");
@@ -40,40 +41,20 @@ export default function Enter() {
           </div>
         </div>
         <form className="flex flex-col">
-          <label
-            htmlFor="input"
-            className="mt-8 text-sm font-medium text-gray-500"
-          >
-            {method === "email" ? "Email address" : null}
-            {method === "phone" ? "Phone number" : null}
-          </label>
-          <div className="mt-1">
-            {method === "email" ? (
-              <input
-                id="input"
-                type="email"
-                className="w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500"
-                required
-              />
-            ) : null}
-            {method === "phone" ? (
-              <div className="flex shadow-sm">
-                <span className="flex select-none items-center justify-center rounded-l-md border border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">
-                  +82
-                </span>
-                <input
-                  id="input"
-                  type="number"
-                  className="rounder-l-none w-full appearance-none rounded-r-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500"
-                  required
-                />
-              </div>
-            ) : null}
-          </div>
-          <button className="mt-5 rounded-md border border-transparent bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-            {method === "email" ? "Get login link" : null}
-            {method === "phone" ? "Get one-time password" : null}
-          </button>
+          {method === "email" ? (
+            <Input name="email" label="Email address" type="email" required />
+          ) : null}
+          {method === "phone" ? (
+            <Input
+              name="phone"
+              label="Phone number"
+              type="number"
+              kind="phone"
+              required
+            />
+          ) : null}
+          {method === "email" ? <Button text="Get login link" /> : null}
+          {method === "phone" ? <Button text="Get one-time password" /> : null}
         </form>
         <div className="mt-6">
           <div className="reletive">

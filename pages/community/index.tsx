@@ -1,25 +1,30 @@
-import Layout from "@/components/layout";
 import type { NextPage } from "next";
+import Link from "next/link";
+import FloatingButton from "../../components/floating-button";
+import Layout from "../../components/layout";
 
 const Community: NextPage = () => {
   return (
-    <Layout title="동네생활" hasTabBar>
-       <div className="space-y-8 py-16 pl-4">
-      {[1, 2, 3, 5, 6].map((_, i) => {
-        return (
-          <div key={i} className="flex flex-col items-start">
-            <span className="flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+    <Layout hasTabBar title="동네생활">
+      <div className="space-y-4 divide-y-[2px]">
+        {[1, 2, 3, 4, 5, 6].map((_, i) => (
+          <Link
+            key={i}
+            className="flex cursor-pointer flex-col items-start pt-4"
+            href={`/community/${i}`}
+          >
+            <span className="ml-4 flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
               동네질문
             </span>
-            <div className="mt-2 text-gray-700">
-              <span className="mr-1 font-medium text-orange-500">Q.</span>
-              What is the best mandu restaurant?
+            <div className="mt-2 px-4 text-gray-700">
+              <span className="font-medium text-orange-500">Q.</span> What is
+              the best mandu restaurant?
             </div>
-            <div className="mt-5 flex w-full items-center justify-between text-xs text-gray-500">
+            <div className="mt-5 flex w-full items-center justify-between px-4 text-xs font-medium text-gray-500">
               <span>니꼬</span>
               <span>18시간 전</span>
             </div>
-            <div className="mt-3 flex w-full space-x-5 border-b-[2px] border-t py-2.5 text-gray-700">
+            <div className="mt-3 flex w-full space-x-5 border-t px-4 py-2.5   text-gray-700">
               <span className="flex items-center space-x-2 text-sm">
                 <svg
                   className="h-4 w-4"
@@ -55,28 +60,26 @@ const Community: NextPage = () => {
                 <span>답변 1</span>
               </span>
             </div>
-          </div>
-        );
-      })}
-      <button className="fixed bottom-24 right-5 cursor-pointer rounded-full bg-orange-400 p-4 text-white shadow-xl transition-colors hover:bg-orange-500">
-        <svg
-          className="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-          ></path>
-        </svg>
-      </button>
-    </div>
+          </Link>
+        ))}
+        <FloatingButton href="/community/write">
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+            ></path>
+          </svg>
+        </FloatingButton>
+      </div>
     </Layout>
-   
   );
 };
 
