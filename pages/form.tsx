@@ -3,19 +3,25 @@ interface LoginForm {
   username: string;
   password: string;
   email: string;
+  errors?: string;
 }
 export default function Forms() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
+    setError,
+    setValue,
+    reset,
+    resetField,
   } = useForm<LoginForm>();
 
   const onValid = (data: LoginForm) => {
     console.log("im valid bby");
   };
   const onInvalid = (errors: FieldErrors) => {
-    console.log("d");
+    console.log("error");
   };
 
   return (
@@ -32,6 +38,7 @@ export default function Forms() {
         placeholder="Username"
         required
       />
+      {errors.username?.message}
       <input
         {...register("email", {
           required: "Email is required",
@@ -52,6 +59,7 @@ export default function Forms() {
         required
       />
       <input type="submit" value="Create Account" />
+      {errors.errors?.message}
     </form>
   );
 }
