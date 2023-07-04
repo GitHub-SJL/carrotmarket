@@ -1,9 +1,9 @@
 import { useState } from "react";
-
-import { cls } from "../libs/utils";
+import { cls } from "../libs/client/utils";
 import Button from "@/components/button";
 import Input from "@/components/input";
 import { useForm } from "react-hook-form";
+import useMutation from "@/libs/client/useMutation";
 
 interface EnterForm {
   email?: string;
@@ -11,6 +11,7 @@ interface EnterForm {
 }
 
 export default function Enter() {
+  const [enter, { loading, data, error }] = useMutation("/api/users/enter");
   const { register, watch, reset, handleSubmit } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
@@ -22,9 +23,11 @@ export default function Enter() {
     setMethod("phone");
   };
 
-  const onValid = (data: EnterForm) => {
-    console.log(data);
+  const onValid = (validForm: EnterForm) => {
+    enter(validForm);
   };
+
+  console.log(loading, data, error);
   return (
     <div className="mx-4 mt-16">
       <h3 className="text-center text-3xl font-bold">Enter to Carrot</h3>
@@ -76,8 +79,12 @@ export default function Enter() {
               kind="phone"
             />
           ) : null}
-          {method === "email" ? <Button text="Get login link" /> : null}
-          {method === "phone" ? <Button text="Get one-time password" /> : null}
+          {method === "email" ? (
+            <Button text={loading ? "Loading" : "Get login link"} />
+          ) : null}
+          {method === "phone" ? (
+            <Button text={loading ? "Loading" : "Get one-time password"} />
+          ) : null}
         </form>
         <div className="mt-6">
           <div className="reletive">
