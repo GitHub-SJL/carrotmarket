@@ -1,18 +1,19 @@
+import type { NextPage } from "next";
 import { useState } from "react";
-import { cls } from "../libs/client/utils";
-import Button from "@/components/button";
-import Input from "@/components/input";
 import { useForm } from "react-hook-form";
-import useMutation from "@/libs/client/useMutation";
+import Button from "../components/button";
+import Input from "../components/input";
+import useMutation from "../libs/client/useMutation";
+import { cls } from "../libs/client/utils";
 
 interface EnterForm {
   email?: string;
   phone?: string;
 }
 
-export default function Enter() {
+const Enter: NextPage = () => {
   const [enter, { loading, data, error }] = useMutation("/api/users/enter");
-  const { register, watch, reset, handleSubmit } = useForm<EnterForm>();
+  const { register, handleSubmit, reset } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
     reset();
@@ -22,27 +23,24 @@ export default function Enter() {
     reset();
     setMethod("phone");
   };
-
   const onValid = (validForm: EnterForm) => {
+    if (loading) return;
     enter(validForm);
   };
-
-  console.log(loading, data, error);
+  console.log(data);
   return (
-    <div className="mx-4 mt-16">
+    <div className="mt-16 px-4">
       <h3 className="text-center text-3xl font-bold">Enter to Carrot</h3>
-      <div className="mt-8">
+      <div className="mt-12">
         <div className="flex flex-col items-center">
-          <h5 className="text-center text-sm font-medium text-gray-500">
-            Enter using:
-          </h5>
-          <div className="mt-8 grid w-full grid-cols-2 gap-16 border-b ">
+          <h5 className="text-sm font-medium text-gray-500">Enter using:</h5>
+          <div className="mt-8 grid  w-full grid-cols-2 border-b ">
             <button
               className={cls(
-                "border-b pb-4 font-medium",
+                "border-b-2 pb-4 text-sm font-medium",
                 method === "email"
-                  ? "border-orange-500  font-medium text-orange-400"
-                  : "border-transparent text-gray-500"
+                  ? " border-orange-500 text-orange-400"
+                  : "border-transparent text-gray-500 hover:text-gray-400"
               )}
               onClick={onEmailClick}
             >
@@ -50,10 +48,10 @@ export default function Enter() {
             </button>
             <button
               className={cls(
-                "border-b pb-4 font-medium",
+                "border-b-2 pb-4 text-sm font-medium",
                 method === "phone"
-                  ? "border-orange-500 font-medium text-orange-400"
-                  : "border-transparent text-gray-500"
+                  ? " border-orange-500 text-orange-400"
+                  : "border-transparent text-gray-500 hover:text-gray-400"
               )}
               onClick={onPhoneClick}
             >
@@ -61,10 +59,15 @@ export default function Enter() {
             </button>
           </div>
         </div>
-        <form onSubmit={handleSubmit(onValid)} className="flex flex-col">
+        <form
+          onSubmit={handleSubmit(onValid)}
+          className="mt-8 flex flex-col space-y-4"
+        >
           {method === "email" ? (
             <Input
-              register={register("email", { required: true })}
+              register={register("email", {
+                required: true,
+              })}
               name="email"
               label="Email address"
               type="email"
@@ -72,7 +75,7 @@ export default function Enter() {
           ) : null}
           {method === "phone" ? (
             <Input
-              register={register("email")}
+              register={register("phone")}
               name="phone"
               label="Phone number"
               type="number"
@@ -86,10 +89,11 @@ export default function Enter() {
             <Button text={loading ? "Loading" : "Get one-time password"} />
           ) : null}
         </form>
-        <div className="mt-6">
-          <div className="reletive">
+
+        <div className="mt-8">
+          <div className="relative">
             <div className="absolute w-full border-t border-gray-300" />
-            <div className="relative -top-3 text-center">
+            <div className="relative -top-3 text-center ">
               <span className="bg-white px-2 text-sm text-gray-500">
                 Or enter with
               </span>
@@ -125,4 +129,5 @@ export default function Enter() {
       </div>
     </div>
   );
-}
+};
+export default Enter;
