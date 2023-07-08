@@ -34,13 +34,14 @@ async function handler(
   });
 
   if (phone) {
-    const message = await twilioClient.messages.create({
-      messagingServiceSid: process.env.TWILIO_MSID,
-      body: `Your login token is ${payload}`,
-      from: "+18147873034",
-      to: process.env.MY_PHONE!,
-    });
-    console.log(message);
+    // Twilio SMS 인증 Service (유료)
+    // const message = await twilioClient.messages.create({
+    //   messagingServiceSid: process.env.TWILIO_MSID,
+    //   body: `Your login token is ${payload}`,
+    //   from: "+18147873034",
+    //   to: process.env.MY_PHONE!,
+    // });
+    // console.log(message);
   }
   return res.json({
     ok: true,
