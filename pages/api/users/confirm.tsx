@@ -1,17 +1,36 @@
+import { withIronSessionApiRoute } from "iron-session/next";
 import { NextApiRequest, NextApiResponse } from "next";
-import twilio from "twilio";
 import client from "@/libs/server/clients";
 import withHandler, { ResponseType } from "@/libs/server/withHandler";
-
-const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
   const { token } = req.body;
-  console.log(token);
+  const exists = await client.token.findUnique({
+    where: {
+      payload: token,
+    },
+    include: { user: true },
+  });
+  if (!exists) {
+    res.status(404).end();
+    return;
+  }
+
+  req.session.user = {
+    id: exists?.userId,
+  };
+
+  await req.session.save();
+  console.log(req.session);
+
+  console.log(exists);
   res.status(200).end();
 }
 
-export default withHandler("POST", handler);
+export default withIronSessionApiRoute(withHandler("POST", handler), {
+  cookieName: "carrotsession",
+  password: "dsdaopdkapsodkopaskcopkxpockzpoxkcopaksdopakdop",
+});
