@@ -16,7 +16,6 @@ export default function Layout({
   children,
 }: LayoutProps) {
   const router = useRouter();
-  console.log(router.pathname, "router");
   const onClick = () => {
     router.back();
   };
