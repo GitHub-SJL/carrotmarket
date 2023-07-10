@@ -18,7 +18,7 @@ export default function Item({
   return (
     <Link
       className="flex cursor-pointer justify-between px-4 pt-5"
-      href={`/items/${id}`}
+      href={`/products/${id}`}
     >
       <div className="flex space-x-4">
         <div className="h-20 w-20 rounded-md bg-gray-400" />
