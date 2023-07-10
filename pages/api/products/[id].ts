@@ -22,7 +22,24 @@ async function handler(
       },
     },
   });
-  res.json({ ok: true, product });
+
+  const terms = product?.name.split(" ").map((word) => ({
+    name: {
+      contains: word,
+    },
+  }));
+
+  const relatedProducts = await client.product.findMany({
+    where: {
+      OR: terms,
+      AND: {
+        id: {
+          not: product?.id,
+        },
+      },
+    },
+  });
+  res.json({ ok: true, product, relatedProducts });
 }
 
 export default withApiSession(
