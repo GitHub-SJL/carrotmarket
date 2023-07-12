@@ -122,8 +122,7 @@ model Review {
   createdId    Int
   createdFor   User     @relation(name: "receivedReviews", fields: [createdForId], references: [id], onDelete: Cascade)
   createdForId Int
-
-  @@index([createdId, createdForId])
+  score        Int
 }
 
 model Sale {
@@ -134,8 +133,6 @@ model Sale {
   userId    Int
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
-
-  @@index([userId, productId])
 }
 
 model Purchase {
@@ -146,8 +143,6 @@ model Purchase {
   userId    Int
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
-
-  @@index([userId, productId])
 }
 
 model Reocord {
@@ -159,8 +154,6 @@ model Reocord {
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
   kind      kind
-
-  @@index([userId, productId])
 }
 
 enum kind {
