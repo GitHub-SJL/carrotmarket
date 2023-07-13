@@ -4,26 +4,44 @@ import FloatingButton from "@/components/floating-button";
 import Layout from "@/components/layout";
 import { Stream } from "@prisma/client";
 import useSWR from "swr";
+import { useEffect, useState } from "react";
+import { useObserver } from "@/libs/client/useObserver";
 interface StreamsResponse {
   ok: boolean;
   streams: Stream[];
+  end?: boolean;
 }
 const Streams: NextPage = () => {
-  const { data } = useSWR<StreamsResponse>(`/api/streams?page=3`);
+  const [page, setPage] = useState(1);
+  const [streams, setStreams] = useState<Stream[]>([]);
+
+  const { data, mutate } = useSWR<StreamsResponse>(`/api/streams?page=${page}`);
+
+  useEffect(() => {
+    if (!data?.streams && !data?.streams.length) return;
+    setStreams(streams.concat(data.streams));
+  }, [data]);
+
+  const onIntersect = (entry: any, observer: any) => {
+    setPage((prev) => prev + 1);
+  };
+  const infRef = useObserver(onIntersect, 0.1);
+
   return (
     <Layout hasTabBar title="라이브">
       <div className=" space-y-4 divide-y-[1px]">
-        {data?.streams?.map((stream) => (
-          <Link
-            key={stream.id}
-            href={`/streams/${stream.id}`}
-            className="block px-4  pt-4"
-          >
-            <div className="aspect-video w-full rounded-md bg-slate-300 shadow-sm" />
-            <h1 className="mt-2 text-2xl font-bold text-gray-900">
-              {stream.name}
-            </h1>
-          </Link>
+        {streams?.map((stream, idx) => (
+          <div key={stream.id}>
+            <Link href={`/streams/${stream.id}`} className="block px-4 pt-4">
+              <div className="aspect-video w-full rounded-md bg-slate-300 shadow-sm" />
+              <h1 className="mt-2 text-2xl font-bold text-gray-900">
+                {stream.name}
+              </h1>
+            </Link>
+            {idx === streams.length - 1 ? (
+              <div ref={!data?.end ? infRef : null} />
+            ) : null}
+          </div>
         ))}
         <FloatingButton href="/streams/create">
           <svg
