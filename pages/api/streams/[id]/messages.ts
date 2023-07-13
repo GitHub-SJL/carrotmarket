@@ -8,10 +8,21 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { id } = req.query;
-
-  const stream = await client.stream.findUnique({
-    where: {
-      id: Number(id?.toString()),
+  const { user } = req.session;
+  const { body } = req;
+  const stream = await client.message.create({
+    data: {
+      message: body.message,
+      stream: {
+        connect: {
+          id: Number(id?.toString()),
+        },
+      },
+      user: {
+        connect: {
+          id: user?.id,
+        },
+      },
     },
   });
 
@@ -23,7 +34,7 @@ async function handler(
 
 export default withApiSession(
   withHandler({
-    methods: ["GET"],
+    methods: ["POST"],
     handler,
   })
 );
