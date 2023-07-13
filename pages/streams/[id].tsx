@@ -74,7 +74,7 @@ const StreamDetail: NextPage = () => {
 
   useEffect(() => {
     scrollRef?.current?.scrollIntoView();
-  });
+  }, [data?.stream?.Message]);
 
   return (
     <Layout canGoBack>

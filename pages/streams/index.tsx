@@ -9,7 +9,7 @@ interface StreamsResponse {
   streams: Stream[];
 }
 const Streams: NextPage = () => {
-  const { data } = useSWR<StreamsResponse>(`/api/streams`);
+  const { data } = useSWR<StreamsResponse>(`/api/streams?page=3`);
   return (
     <Layout hasTabBar title="라이브">
       <div className=" space-y-4 divide-y-[1px]">
