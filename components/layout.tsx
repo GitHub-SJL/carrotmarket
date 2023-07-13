@@ -120,10 +120,10 @@ export default function Layout({
             <span>채팅</span>
           </Link>
           <Link
-            href="/live"
+            href="/streams"
             className={cls(
               "flex flex-col items-center space-y-2",
-              router.pathname === "/live" ? "text-orange-500" : ""
+              router.pathname === "/streams" ? "text-orange-500" : ""
             )}
           >
             <svg
