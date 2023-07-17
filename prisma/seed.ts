@@ -11,6 +11,9 @@ async function main() {
         name: String(idx),
         description: String(idx),
         price: idx,
+        cloudflareId: `cloudflareId-${idx}`,
+        cloudflareUrl: `cloudflareUrl-${idx}`,
+        cloudflareKey: `cloudflareKey-${idx}`,
         user: {
           connect: {
             id: 18,
@@ -21,6 +24,7 @@ async function main() {
     console.log(`${idx + 1}/100`); // 인덱스는 0부터 시작하므로 1을 더해줍니다
   }
 }
+
 main()
   .catch((e) => console.log(e))
   .finally(() => client.$disconnect());
