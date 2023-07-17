@@ -18,7 +18,7 @@ async function handler(
         headers: {
           Authorization: `Bearer ${process.env.CF_STREAM_TOKEN}`,
         },
-        body: `{"meta": {"name":"${name}"},"recording": { "mode": "automatic" }}`,
+        body: `{"meta": {"name":"${name}"},"recording": { "mode": "automatic" }, "thumbnailTimestampPct": 0.5}`,
       }
     );
     const {
