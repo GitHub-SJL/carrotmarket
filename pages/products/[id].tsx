@@ -4,9 +4,11 @@ import Layout from "@/components/layout";
 import { useRouter } from "next/router";
 import useSWR, { useSWRConfig } from "swr";
 import Link from "next/link";
-import { Product, User } from "@prisma/client";
 import useMutation from "@/libs/client/useMutation";
 import { cls } from "@/libs/client/utils";
+import useUser from "@/libs/client/useUser";
+import Image from "next/image";
+import { Product, User } from "@prisma/client";
 interface ProductWithUser extends Product {
   user: User;
 }
@@ -34,9 +36,22 @@ const ItemDetail: NextPage = () => {
     <Layout canGoBack>
       <div className="px-4  py-4">
         <div className="mb-8">
-          <div className="h-96 bg-slate-300" />
+          <div className="relative pb-80">
+            <Image
+              src={`https://imagedelivery.net/AdBlXNyreqAJC4gcMMeKjA/${data?.product?.image}/public`}
+              className="h-96 bg-slate-300 object-cover"
+              fill
+              alt="product-image"
+            />
+          </div>
           <div className="flex cursor-pointer items-center space-x-3 border-b border-t py-3">
-            <div className="h-12 w-12 rounded-full bg-slate-300" />
+            <Image
+              src={`https://imagedelivery.net/AdBlXNyreqAJC4gcMMeKjA/${data?.product?.user?.avatar}/avatar`}
+              width={48}
+              height={48}
+              alt="profile"
+              className="h-12 w-12 rounded-full bg-slate-300"
+            />
             <div>
               <p className="text-sm font-medium text-gray-700">
                 {data?.product?.user?.name}

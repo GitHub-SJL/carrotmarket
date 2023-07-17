@@ -28,7 +28,7 @@ const Create: NextPage = () => {
     if (loading) return;
     createStream(form);
   };
-
+  console.log(data, "data")
   useEffect(() => {
     if (data && data.ok) {
       router.push(`/streams/${data.stream.id}`);
