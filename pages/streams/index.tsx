@@ -6,6 +6,7 @@ import { Stream } from "@prisma/client";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import { useObserver } from "@/libs/client/useObserver";
+import Image from "next/image";
 interface StreamsResponse {
   ok: boolean;
   streams: Stream[];
@@ -33,7 +34,13 @@ const Streams: NextPage = () => {
         {streams?.map((stream, idx) => (
           <div key={stream.id}>
             <Link href={`/streams/${stream.id}`} className="block px-4 pt-4">
-              <div className="aspect-video w-full rounded-md bg-slate-300 shadow-sm" />
+              <div className="relative aspect-video w-full overflow-hidden rounded-md bg-slate-300 shadow-sm">
+                <Image
+                  fill
+                  alt="liveStream"
+                  src={`https://videodelivery.net/${stream.cloudflareId}/thumbnails/thumbnail.jpg?height=320`}
+                />
+              </div>
               <h1 className="mt-2 text-2xl font-bold text-gray-900">
                 {stream.name}
               </h1>
