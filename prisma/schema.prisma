@@ -113,7 +113,7 @@ model Wondering {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([postId, userId])
+  @@index([userId, postId])
 }
 
 model Review {
@@ -126,6 +126,8 @@ model Review {
   score        Int
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@index([createdId, createdForId])
 }
 
 model Sale {
@@ -178,6 +180,8 @@ model Stream {
   cloudflareId  String
   cloudflareUrl String
   cloudflareKey String
+
+  @@index([userId])
 }
 
 model Message {
@@ -189,4 +193,6 @@ model Message {
   streamId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId, streamId])
 }

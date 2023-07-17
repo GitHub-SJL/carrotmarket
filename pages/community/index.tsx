@@ -5,6 +5,7 @@ import Layout from "@/components/layout";
 import useSWR from "swr";
 import { Post, User } from "@prisma/client";
 import useCoords from "@/libs/client/useCoords";
+import { format } from "date-fns";
 
 interface PostWithUser extends Post {
   user: User;
@@ -45,7 +46,7 @@ const Community: NextPage = () => {
             </div>
             <div className="mt-5 flex w-full items-center justify-between px-4 text-xs font-medium text-gray-500">
               <span>{post.user.name}</span>
-              <span>{post.createdAt}</span>
+              {format(post.createdAt, "yyyy-MM-dd")}
             </div>
             <div className="mt-3 flex w-full space-x-5 border-t px-4 py-2.5   text-gray-700">
               <span className="flex items-center space-x-2 text-sm">

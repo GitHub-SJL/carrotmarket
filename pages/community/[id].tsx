@@ -9,7 +9,7 @@ import useMutation from "@/libs/client/useMutation";
 import { cls } from "@/libs/client/utils";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-
+import { format } from "date-fns";
 interface AnswerWithUser extends Answer {
   user: User;
 }
@@ -161,7 +161,7 @@ const CommunityPostDetail: NextPage = () => {
                   {answer.user.name}
                 </span>
                 <span className="block text-xs text-gray-500 ">
-                  {answer.createdAt}
+                  {format(answer.createdAt, "yyyy-MM-dd")}
                 </span>
                 <p className="mt-2 text-gray-700">{answer.answer} </p>
               </div>
