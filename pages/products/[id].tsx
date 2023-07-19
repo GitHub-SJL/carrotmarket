@@ -32,6 +32,7 @@ const ItemDetail: NextPage = () => {
     // mutate("/api/users/me", (prev: any) => prev && { ok: !prev.ok }, false);
     toggleFav({});
   };
+
   return (
     <Layout canGoBack>
       <div className="px-4  py-4">
@@ -39,7 +40,7 @@ const ItemDetail: NextPage = () => {
           <div className="relative pb-80">
             <Image
               src={`https://imagedelivery.net/AdBlXNyreqAJC4gcMMeKjA/${data?.product?.image}/public`}
-              className="h-96 bg-slate-300 object-cover"
+              className="h-96 bg-slate-300 object-fill"
               fill
               alt="product-image"
             />
